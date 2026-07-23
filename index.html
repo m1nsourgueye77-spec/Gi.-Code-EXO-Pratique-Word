@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Évaluation Word</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    line-height: 1.5;
+    color: #000;
+    background: #f9fafc;
+  }
+  h1 {
+    text-align: center;
+    color: #0d5a9a;
+  }
+  h2, h3 {
+    color: #0d5a9a;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  table, th, td {
+    border: 1px solid #000;
+  }
+  th, td {
+    padding: 8px;
+    text-align: center;
+  }
+  .section {
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .instructions {
+    margin: 10px 0;
+  }
+  .carte-cours {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .btn-principal, .btn-secondaire, .btn-pdf {
+    display: inline-block;
+    margin: 0.3em 0;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .btn-principal { background:#0d5a9a; color:white; }
+  .btn-secondaire { background:#e3eef8; color:#0d5a9a; }
+  .btn-pdf { background:#27ae60; color:white; float:right; }
+  ul { list-style-type: disc; margin-left: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Évaluation – Word : Mise en page, Alignement & Tableaux</h1>
+<p><strong>Durée :</strong> 30 minutes</p>
+<p><strong>Matériel :</strong> Word installé sur votre ordinateur</p>
+<button class="btn-pdf" onclick="telechargerPDF()">📄 Télécharger en PDF</button>
+<br><br>
+
+<div id="coursContainer"></div>
+
+<!-- Bibliothèque html2pdf (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+  // === Données du cours intégrées directement ===
+  const cours = [
+    {
+      icone: "🧩",
+      titre: "Partie 2 : Pratique – 5 points",
+      description: "Exercices pratiques pour tester la maîtrise de Microsoft Word : tabulations, mise en page, tableaux et fusion de cellules.",
+      page: "#",
+      fichiers: [
+        { nom: "Consignes complètes (HTML)", url: "https://g-mansour1977.github.io/Evaluation-Gi.-Code/" }
+      ],
+      exercices: [
+        {
+          titre: "1. Tabulations & Alignement",
+          taches: [
+            "Tapez le texte : Nom – Prénom – Date de naissance.",
+            "Ajoutez une tabulation droite à 5,5” et alignez la date de naissance.",
+            "Centrez le titre « Évaluation Word » sur la page."
+          ]
+        },
+        {
+          titre: "2. Marges & Mise en page",
+          taches: [
+            "Changez les marges : Gauche 2 cm, Droite 2 cm, Haut 2,5 cm, Bas 2,5 cm.",
+            "Passez la page en orientation paysage."
+          ]
+        },
+        {
+          titre: "3. Tableaux",
+          taches: [
+            "Insérez un tableau de 4 lignes et 5 colonnes.",
+            "Saisissez les données : Date, Nom, Produit, Quantité, Prix.",
+            "Ajoutez une ligne au-dessus du 03/01/2025 avec : 05/01/2025 | Epsilon | E5 | 20 | $10.",
+            "Appliquez un style de tableau de votre choix."
+          ]
+        },
+        {
+          titre: "4. Fusionner et Diviser",
+          taches: [
+            "Fusionnez la première cellule de la première ligne avec la deuxième cellule pour créer un titre.",
+            "Divisez la cellule du prix de la dernière ligne en deux cellules."
+          ]
+        }
+      ],
+      bareme: {
+        QCM: "5 points (1 point par bonne réponse)",
+        Pratique: {
+          Total: "5 points",
+          Détails: {
+            "Tabulations & alignement": "1,5 pts",
+            "Marges & orientation": "1 pt",
+            "Tableau & saisie des données": "1,5 pts",
+            "Fusion / Division": "1 pt"
+          }
+        }
+      }
+    }
+  ];
+
+  // === Génération dynamique du contenu ===
+  const container = document.getElementById('coursContainer');
+  cours.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'carte-cours';
+    card.innerHTML = `
+      <h2>${c.icone} ${c.titre}</h2>
+      <p>${c.description}</p>
+      <a href="${c.page}" class="btn-principal">Voir les leçons</a>
+      <ul>
+        ${c.fichiers.map(f => `
+          <li><a href="${f.url}" class="btn-secondaire" download>📥 ${f.nom}</a></li>
+        `).join('')}
+      </ul>
+
+      <h3>Exercices :</h3>
+      ${c.exercices.map(ex => `
+        <div class="section">
+          <h4>${ex.titre}</h4>
+          <ul>${ex.taches.map(t => `<li>${t}</li>`).join('')}</ul>
+        </div>
+      `).join('')}
+
+      <h3>Barème :</h3>
+      <ul>
+        <li><strong>QCM :</strong> ${c.bareme.QCM}</li>
+        <li><strong>Pratique :</strong> ${c.bareme.Pratique.Total}
+          <ul>
+            ${Object.entries(c.bareme.Pratique.Détails).map(([k,v]) => `<li>${k} : ${v}</li>`).join('')}
+          </ul>
+        </li>
+      </ul>
+    `;
+    container.appendChild(card);
+  });
+
+  // === Fonction de téléchargement PDF ===
+  function telechargerPDF() {
+    const element = document.body;
+    const options = {
+      margin: 0.5,
+      filename: 'Evaluation_Word_Pratique.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(options).from(element).save();
+  }
+</script>
+
+</body>
+</html>
