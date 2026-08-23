@@ -1,189 +1,639 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Évaluation Word</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    line-height: 1.5;
-    color: #000;
-    background: #f9fafc;
-  }
-  h1 {
-    text-align: center;
-    color: #0d5a9a;
-  }
-  h2, h3 {
-    color: #0d5a9a;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  table, th, td {
-    border: 1px solid #000;
-  }
-  th, td {
-    padding: 8px;
-    text-align: center;
-  }
-  .section {
-    margin-bottom: 30px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  .instructions {
-    margin: 10px 0;
-  }
-  .carte-cours {
-    background: #fff;
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  .btn-principal, .btn-secondaire, .btn-pdf {
-    display: inline-block;
-    margin: 0.3em 0;
-    padding: 0.5em 1em;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .btn-principal { background:#0d5a9a; color:white; }
-  .btn-secondaire { background:#e3eef8; color:#0d5a9a; }
-  .btn-pdf { background:#27ae60; color:white; float:right; }
-  ul { list-style-type: disc; margin-left: 20px; }
-</style>
-</head>
-<body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gi. Code Formation – Revision | WORD</title>
 
-<h1>Évaluation – Word : Mise en page, Alignement & Tableaux</h1>
-<p><strong>Durée :</strong> 30 minutes</p>
-<p><strong>Matériel :</strong> Word installé sur votre ordinateur</p>
-<button class="btn-pdf" onclick="telechargerPDF()">📄 Télécharger en PDF</button>
-<br><br>
+  <!-- Bibliothèque PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-<div id="coursContainer"></div>
-
-<!-- Bibliothèque html2pdf (CDN) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<script>
-  // === Données du cours intégrées directement ===
-  const cours = [
-    {
-      icone: "🧩",
-      titre: "Partie 2 : Pratique – 5 points",
-      description: "Exercices pratiques pour tester la maîtrise de Microsoft Word : tabulations, mise en page, tableaux et fusion de cellules.",
-      page: "#",
-      fichiers: [
-        { nom: "Consignes complètes (HTML)", url: "https://g-mansour1977.github.io/Evaluation-Gi.-Code/" }
-      ],
-      exercices: [
-        {
-          titre: "1. Tabulations & Alignement",
-          taches: [
-            "Tapez le texte : Nom – Prénom – Date de naissance.",
-            "Ajoutez une tabulation droite à 5,5” et alignez la date de naissance.",
-            "Centrez le titre « Évaluation Word » sur la page."
-          ]
-        },
-        {
-          titre: "2. Marges & Mise en page",
-          taches: [
-            "Changez les marges : Gauche 2 cm, Droite 2 cm, Haut 2,5 cm, Bas 2,5 cm.",
-            "Passez la page en orientation paysage."
-          ]
-        },
-        {
-          titre: "3. Tableaux",
-          taches: [
-            "Insérez un tableau de 4 lignes et 5 colonnes.",
-            "Saisissez les données : Date, Nom, Produit, Quantité, Prix.",
-            "Ajoutez une ligne au-dessus du 03/01/2025 avec : 05/01/2025 | Epsilon | E5 | 20 | $10.",
-            "Appliquez un style de tableau de votre choix."
-          ]
-        },
-        {
-          titre: "4. Fusionner et Diviser",
-          taches: [
-            "Fusionnez la première cellule de la première ligne avec la deuxième cellule pour créer un titre.",
-            "Divisez la cellule du prix de la dernière ligne en deux cellules."
-          ]
-        }
-      ],
-      bareme: {
-        QCM: "5 points (1 point par bonne réponse)",
-        Pratique: {
-          Total: "5 points",
-          Détails: {
-            "Tabulations & alignement": "1,5 pts",
-            "Marges & orientation": "1 pt",
-            "Tableau & saisie des données": "1,5 pts",
-            "Fusion / Division": "1 pt"
-          }
-        }
-      }
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-  ];
 
-  // === Génération dynamique du contenu ===
-  const container = document.getElementById('coursContainer');
-  cours.forEach(c => {
-    const card = document.createElement('div');
-    card.className = 'carte-cours';
-    card.innerHTML = `
-      <h2>${c.icone} ${c.titre}</h2>
-      <p>${c.description}</p>
-      <a href="${c.page}" class="btn-principal">Voir les leçons</a>
-      <ul>
-        ${c.fichiers.map(f => `
-          <li><a href="${f.url}" class="btn-secondaire" download>📥 ${f.nom}</a></li>
-        `).join('')}
-      </ul>
+    #zonePDF {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 800px;
+      width: 100%;
+    }
 
-      <h3>Exercices :</h3>
-      ${c.exercices.map(ex => `
-        <div class="section">
-          <h4>${ex.titre}</h4>
-          <ul>${ex.taches.map(t => `<li>${t}</li>`).join('')}</ul>
-        </div>
-      `).join('')}
+    header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #0d6efd;
+      padding-bottom: 10px;
+    }
 
-      <h3>Barème :</h3>
-      <ul>
-        <li><strong>QCM :</strong> ${c.bareme.QCM}</li>
-        <li><strong>Pratique :</strong> ${c.bareme.Pratique.Total}
-          <ul>
-            ${Object.entries(c.bareme.Pratique.Détails).map(([k,v]) => `<li>${k} : ${v}</li>`).join('')}
-          </ul>
+    header img {
+      width: 70px;
+      margin-right: 15px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      color: #0d6efd;
+      margin: 0;
+    }
+
+    h2 {
+      color: #333;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    ol {
+      line-height: 1.7;
+    }
+
+    button {
+      margin-top: 30px;
+      background: #0d6efd;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #084298;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="zonePDF">
+    <header>
+      <img src="https://i.ibb.co/27xRzqTQ/logo.png" alt="Logo Gi.Code Formation">
+      <h1>Gi. Code Formation – Revision | WORD : Mise en page, Alignement & Tableaux</h1>
+    </header>
+
+    <p><strong>Durée :</strong> 30 minutes</p>
+    <p><strong>Matériel requis :</strong> Microsoft Word installé sur votre ordinateur</p>
+
+    <!-- ============================= -->
+<!-- PARTIE 1 : QCM -->
+<!-- ============================= -->
+
+<section class="section">
+
+    <h2>🧠 Partie 1 : Théorie – QCM – 5 points</h2>
+
+    <p>
+        <strong>Consigne :</strong>
+        Pour chaque question, choisissez une seule bonne réponse.
+        Chaque question vaut <strong>0,25 point</strong>.
+    </p>
+
+    <!-- ================= -->
+    <!-- A. TABULATIONS -->
+    <!-- ================= -->
+
+    <h3>📏 A. Tabulations et alignement</h3>
+
+    <ol>
+
+        <li>
+            Quelle est la tabulation par défaut dans Word ?
+            <ul>
+                <li>A. 0,5 cm</li>
+                <li>B. 1 cm</li>
+                <li>C. 1,25 cm</li>
+                <li>D. 2 cm</li>
+            </ul>
         </li>
+
+        <li>
+            Quelle touche permet d'insérer une tabulation ?
+            <ul>
+                <li>A. Entrée</li>
+                <li>B. Tab</li>
+                <li>C. Ctrl</li>
+                <li>D. Alt</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel outil permet de définir précisément les tabulations ?
+            <ul>
+                <li>A. La boîte de dialogue Tabulations</li>
+                <li>B. Le correcteur orthographique</li>
+                <li>C. Le Presse-papiers</li>
+                <li>D. Le Zoom</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle tabulation permet d'aligner les nombres sur leur partie décimale ?
+            <ul>
+                <li>A. Gauche</li>
+                <li>B. Centre</li>
+                <li>C. Droite</li>
+                <li>D. Décimale</li>
+            </ul>
+        </li>
+
+        <li>
+            Pour aligner correctement plusieurs informations, il est préférable d'utiliser :
+            <ul>
+                <li>A. Plusieurs espaces</li>
+                <li>B. Des tabulations</li>
+                <li>C. Plusieurs Entrées</li>
+                <li>D. Des tirets</li>
+            </ul>
+        </li>
+
+    </ol>
+
+    <!-- ================= -->
+    <!-- B. MISE EN PAGE -->
+    <!-- ================= -->
+
+    <h3>📄 B. Mise en page du document</h3>
+
+    <ol start="6">
+
+        <li>
+            Quel est le format de papier le plus couramment utilisé pour un document standard ?
+            <ul>
+                <li>A. A0</li>
+                <li>B. A3</li>
+                <li>C. A4</li>
+                <li>D. A5</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle orientation permet d'obtenir une page plus large que haute ?
+            <ul>
+                <li>A. Portrait</li>
+                <li>B. Paysage</li>
+                <li>C. Verticale</li>
+                <li>D. Standard</li>
+            </ul>
+        </li>
+
+        <li>
+            Où peut-on modifier les marges d'un document ?
+            <ul>
+                <li>A. Mise en page</li>
+                <li>B. Révision</li>
+                <li>C. Références</li>
+                <li>D. Affichage</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel alignement permet d'aligner le texte à la fois sur la marge gauche et la marge droite ?
+            <ul>
+                <li>A. Gauche</li>
+                <li>B. Droite</li>
+                <li>C. Centré</li>
+                <li>D. Justifié</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle commande permet de modifier l'espace entre les lignes ?
+            <ul>
+                <li>A. Interligne</li>
+                <li>B. Retrait</li>
+                <li>C. Tabulation</li>
+                <li>D. Orientation</li>
+            </ul>
+        </li>
+
+    </ol>
+
+    <!-- ================= -->
+    <!-- C. TABLEAUX -->
+    <!-- ================= -->
+
+    <h3>📊 C. Tableaux</h3>
+
+    <ol start="11">
+
+        <li>
+            Quelle commande permet de créer un tableau ?
+            <ul>
+                <li>A. Insertion → Tableau</li>
+                <li>B. Accueil → Tableau</li>
+                <li>C. Révision → Tableau</li>
+                <li>D. Affichage → Tableau</li>
+            </ul>
+        </li>
+
+        <li>
+            Comment appelle-t-on l'intersection d'une ligne et d'une colonne ?
+            <ul>
+                <li>A. Une page</li>
+                <li>B. Une cellule</li>
+                <li>C. Une marge</li>
+                <li>D. Un paragraphe</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle commande permet de réunir plusieurs cellules ?
+            <ul>
+                <li>A. Fractionner</li>
+                <li>B. Fusionner les cellules</li>
+                <li>C. Trier</li>
+                <li>D. Supprimer</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle commande permet de transformer une cellule en plusieurs cellules ?
+            <ul>
+                <li>A. Fusionner</li>
+                <li>B. Fractionner les cellules</li>
+                <li>C. Copier</li>
+                <li>D. Habillage</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle option permet d'ajuster automatiquement un tableau à la largeur du texte ?
+            <ul>
+                <li>A. Ajustement automatique</li>
+                <li>B. Mise en page</li>
+                <li>C. Habillage</li>
+                <li>D. Alignement</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle commande permet de classer les données d'un tableau ?
+            <ul>
+                <li>A. Trier</li>
+                <li>B. Fusionner</li>
+                <li>C. Fractionner</li>
+                <li>D. Convertir</li>
+            </ul>
+        </li>
+
+    </ol>
+
+    <!-- ================= -->
+    <!-- D. BORDURES -->
+    <!-- ================= -->
+
+    <h3>🎨 D. Bordures et trames</h3>
+
+    <ol start="17">
+
+        <li>
+            Quelle fonctionnalité permet d'ajouter une couleur d'arrière-plan à une cellule ?
+            <ul>
+                <li>A. Trame de fond</li>
+                <li>B. Bordure</li>
+                <li>C. Marge</li>
+                <li>D. Retrait</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle fonctionnalité permet d'ajouter un contour autour d'un paragraphe ?
+            <ul>
+                <li>A. Bordures</li>
+                <li>B. Tabulations</li>
+                <li>C. Styles</li>
+                <li>D. Colonnes</li>
+            </ul>
+        </li>
+
+        <li>
+            Pour modifier la couleur de fond d'une cellule d'un tableau, on utilise principalement :
+            <ul>
+                <li>A. La trame</li>
+                <li>B. Le zoom</li>
+                <li>C. L'orientation</li>
+                <li>D. Le retrait</li>
+            </ul>
+        </li>
+
+    </ol>
+
+    <!-- ================= -->
+    <!-- E. STYLES -->
+    <!-- ================= -->
+
+    <h3>✍️ E. Styles et titres</h3>
+
+    <ol start="20">
+
+        <li>
+            À quoi servent les styles dans Word ?
+            <ul>
+                <li>A. À supprimer les images</li>
+                <li>B. À appliquer rapidement une mise en forme cohérente</li>
+                <li>C. À créer des tableaux uniquement</li>
+                <li>D. À imprimer un document</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel style est généralement utilisé pour le titre principal d'un document ?
+            <ul>
+                <li>A. Titre 1</li>
+                <li>B. Normal</li>
+                <li>C. Citation</li>
+                <li>D. Légende</li>
+            </ul>
+        </li>
+
+        <li>
+            Pourquoi utilise-t-on les styles Titre 1 et Titre 2 ?
+            <ul>
+                <li>A. Pour créer une structure hiérarchique</li>
+                <li>B. Pour modifier les marges</li>
+                <li>C. Pour insérer une image</li>
+                <li>D. Pour créer une tabulation</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle fonctionnalité peut être créée automatiquement grâce aux styles de titres ?
+            <ul>
+                <li>A. Un sommaire automatique</li>
+                <li>B. Une image</li>
+                <li>C. Une vidéo</li>
+                <li>D. Une feuille Excel</li>
+            </ul>
+        </li>
+
+    </ol>
+
+    <!-- ================= -->
+    <!-- F. EN-TETE -->
+    <!-- ================= -->
+
+    <h3>📑 F. En-tête, pied de page et numérotation</h3>
+
+    <ol start="24">
+
+        <li>
+            Où peut-on insérer un en-tête ?
+            <ul>
+                <li>A. Insertion</li>
+                <li>B. Révision</li>
+                <li>C. Données</li>
+                <li>D. Publipostage</li>
+            </ul>
+        </li>
+
+        <li>
+            Où peut-on généralement insérer un numéro de page ?
+            <ul>
+                <li>A. Insertion</li>
+                <li>B. Accueil</li>
+                <li>C. Révision</li>
+                <li>D. Références</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel élément apparaît généralement en bas d'une page ?
+            <ul>
+                <li>A. Le pied de page</li>
+                <li>B. L'en-tête</li>
+                <li>C. La barre de titre</li>
+                <li>D. Le ruban</li>
+            </ul>
+        </li>
+
+    </ol>
+
+    <!-- ================= -->
+    <!-- G. IMAGES -->
+    <!-- ================= -->
+
+    <h3>🖼️ G. Images et objets</h3>
+
+    <ol start="27">
+
+        <li>
+            Dans quel onglet peut-on insérer une image ?
+            <ul>
+                <li>A. Insertion</li>
+                <li>B. Révision</li>
+                <li>C. Affichage</li>
+                <li>D. Références</li>
+            </ul>
+        </li>
+
+        <li>
+            Quelle fonctionnalité permet de déplacer une image librement par rapport au texte ?
+            <ul>
+                <li>A. Habillage du texte</li>
+                <li>B. Interligne</li>
+                <li>C. Tabulation</li>
+                <li>D. Orientation</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel outil permet de créer un texte décoratif ?
+            <ul>
+                <li>A. WordArt</li>
+                <li>B. Tableau</li>
+                <li>C. SmartArt</li>
+                <li>D. Tabulation</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel outil permet de représenter visuellement une organisation ou un processus ?
+            <ul>
+                <li>A. SmartArt</li>
+                <li>B. WordArt</li>
+                <li>C. Bordure</li>
+                <li>D. En-tête</li>
+            </ul>
+        </li>
+
+    </ol>
+
+    <!-- ================= -->
+    <!-- H. QUESTIONS BONUS -->
+    <!-- ================= -->
+
+    <h3>⭐ H. Questions de révision supplémentaires</h3>
+
+    <ol start="31">
+
+        <li>
+            Quelle commande permet de changer la taille du texte ?
+            <ul>
+                <li>A. Taille de police</li>
+                <li>B. Orientation</li>
+                <li>C. Marges</li>
+                <li>D. Habillage</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel raccourci permet de mettre un texte en gras ?
+            <ul>
+                <li>A. Ctrl + I</li>
+                <li>B. Ctrl + G</li>
+                <li>C. Ctrl + U</li>
+                <li>D. Ctrl + P</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel raccourci permet d'enregistrer un document ?
+            <ul>
+                <li>A. Ctrl + S</li>
+                <li>B. Ctrl + C</li>
+                <li>C. Ctrl + V</li>
+                <li>D. Ctrl + Z</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel raccourci permet d'annuler la dernière action ?
+            <ul>
+                <li>A. Ctrl + A</li>
+                <li>B. Ctrl + Z</li>
+                <li>C. Ctrl + P</li>
+                <li>D. Ctrl + X</li>
+            </ul>
+        </li>
+
+        <li>
+            Quel raccourci permet de sélectionner tout le contenu du document ?
+            <ul>
+                <li>A. Ctrl + A</li>
+                <li>B. Ctrl + S</li>
+                <li>C. Ctrl + E</li>
+                <li>D. Ctrl + T</li>
+            </ul>
+        </li>
+
+    </ol>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- PARTIE 2 : CORRIGE -->
+<!-- ============================= -->
+
+<section class="section" style="display: none;">
+
+    <h2>✅ Corrigé du QCM – Formateur</h2>
+
+    <div class="note">
+
+        <strong>Réponses :</strong>
+
+        <p>
+            1. C &nbsp; | &nbsp;
+            2. B &nbsp; | &nbsp;
+            3. A &nbsp; | &nbsp;
+            4. D &nbsp; | &nbsp;
+            5. B
+        </p>
+
+        <p>
+            6. C &nbsp; | &nbsp;
+            7. B &nbsp; | &nbsp;
+            8. A &nbsp; | &nbsp;
+            9. D &nbsp; | &nbsp;
+            10. A
+        </p>
+
+        <p>
+            11. A &nbsp; | &nbsp;
+            12. B &nbsp; | &nbsp;
+            13. B &nbsp; | &nbsp;
+            14. B &nbsp; | &nbsp;
+            15. A &nbsp; | &nbsp;
+            16. A
+        </p>
+
+        <p>
+            17. A &nbsp; | &nbsp;
+            18. A &nbsp; | &nbsp;
+            19. A &nbsp; | &nbsp;
+            20. B &nbsp; | &nbsp;
+            21. A
+        </p>
+
+        <p>
+            22. A &nbsp; | &nbsp;
+            23. A &nbsp; | &nbsp;
+            24. A &nbsp; | &nbsp;
+            25. A &nbsp; | &nbsp;
+            26. A
+        </p>
+
+        <p>
+            27. A &nbsp; | &nbsp;
+            28. A &nbsp; | &nbsp;
+            29. A &nbsp; | &nbsp;
+            30. A
+        </p>
+
+        <p>
+            31. A &nbsp; | &nbsp;
+            32. B &nbsp; | &nbsp;
+            33. A &nbsp; | &nbsp;
+            34. B &nbsp; | &nbsp;
+            35. A
+        </p>
+
+    </div>
+
+</section>
+
+    <section>
+      <h2>Partie 2 : Pratique – 15 points</h2>
+      <p>Réalisez une fiche d’inscription avec :</p>
+      <ul>
+        <li>Un titre centré et souligné</li>
+        <li>Un tableau proprement aligné avec 3 colonnes</li>
+        <li>Une mise en page équilibrée (marges normales, interligne 1,15)</li>
       </ul>
-    `;
-    container.appendChild(card);
-  });
+    </section>
 
-  // === Fonction de téléchargement PDF ===
-  function telechargerPDF() {
-    const element = document.body;
-    const options = {
-      margin: 0.5,
-      filename: 'Evaluation_Word_Pratique.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-    };
-    html2pdf().set(options).from(element).save();
-  }
-</script>
+    <p style="margin-top:40px; text-align:center; color:#666;">
+      © Gi.Code Formation – Bureautique 2025
+    </p>
+  </div>
 
+  <!-- Bouton de téléchargement -->
+  <button onclick="telechargerPDF()">📄 Télécharger cette évaluation en PDF</button>
+
+  <script>
+    function telechargerPDF() {
+      const element = document.getElementById('zonePDF');
+      const opt = {
+        margin: 0.5,
+        filename: 'Debrief Anglais.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 3 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
 </body>
 </html>
