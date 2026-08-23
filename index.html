@@ -72,6 +72,59 @@
     button:hover {
       background: #084298;
     }
+
+
+
+    .box-reponse {
+    margin: 10px 0 18px 0;
+    padding: 12px 15px;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.box-reponse label {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.box-reponse label:hover {
+    background: #e9ecef;
+}
+
+.box-reponse input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+
+.resultat-box {
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid #ddd;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+.resultat-box h2 {
+    margin-top: 0;
+}
+
+#btnPDF {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
   </style>
 </head>
 
@@ -109,55 +162,56 @@
 
         <li>
             Quelle est la tabulation par défaut dans Word ?
-            <ul>
-                <li>A. 0,5 cm</li>
-                <li>B. 1 cm</li>
-                <li>C. 1,25 cm</li>
-                <li>D. 2 cm</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q1" value="0"> A. 0,5 cm</label>
+                <label><input type="radio" name="q1" value="0"> B. 1 cm</label>
+                <label><input type="radio" name="q1" value="0.25"> C. 1,25 cm</label>
+                <label><input type="radio" name="q1" value="0"> D. 2 cm</label>
+            </div>
         </li>
 
         <li>
             Quelle touche permet d'insérer une tabulation ?
-            <ul>
-                <li>A. Entrée</li>
-                <li>B. Tab</li>
-                <li>C. Ctrl</li>
-                <li>D. Alt</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q2" value="0"> A. Entrée</label>
+                <label><input type="radio" name="q2" value="0.25"> B. Tab</label>
+                <label><input type="radio" name="q2" value="0"> C. Ctrl</label>
+                <label><input type="radio" name="q2" value="0"> D. Alt</label>
+            </div>
         </li>
 
         <li>
             Quel outil permet de définir précisément les tabulations ?
-            <ul>
-                <li>A. La boîte de dialogue Tabulations</li>
-                <li>B. Le correcteur orthographique</li>
-                <li>C. Le Presse-papiers</li>
-                <li>D. Le Zoom</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q3" value="0.25"> A. La boîte de dialogue Tabulations</label>
+                <label><input type="radio" name="q3" value="0"> B. Le correcteur orthographique</label>
+                <label><input type="radio" name="q3" value="0"> C. Le Presse-papiers</label>
+                <label><input type="radio" name="q3" value="0"> D. Le Zoom</label>
+            </div>
         </li>
 
         <li>
             Quelle tabulation permet d'aligner les nombres sur leur partie décimale ?
-            <ul>
-                <li>A. Gauche</li>
-                <li>B. Centre</li>
-                <li>C. Droite</li>
-                <li>D. Décimale</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q4" value="0"> A. Gauche</label>
+                <label><input type="radio" name="q4" value="0"> B. Centre</label>
+                <label><input type="radio" name="q4" value="0"> C. Droite</label>
+                <label><input type="radio" name="q4" value="0.25"> D. Décimale</label>
+            </div>
         </li>
 
         <li>
             Pour aligner correctement plusieurs informations, il est préférable d'utiliser :
-            <ul>
-                <li>A. Plusieurs espaces</li>
-                <li>B. Des tabulations</li>
-                <li>C. Plusieurs Entrées</li>
-                <li>D. Des tirets</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q5" value="0"> A. Plusieurs espaces</label>
+                <label><input type="radio" name="q5" value="0.25"> B. Des tabulations</label>
+                <label><input type="radio" name="q5" value="0"> C. Plusieurs Entrées</label>
+                <label><input type="radio" name="q5" value="0"> D. Des tirets</label>
+            </div>
         </li>
 
     </ol>
+
 
     <!-- ================= -->
     <!-- B. MISE EN PAGE -->
@@ -169,55 +223,56 @@
 
         <li>
             Quel est le format de papier le plus couramment utilisé pour un document standard ?
-            <ul>
-                <li>A. A0</li>
-                <li>B. A3</li>
-                <li>C. A4</li>
-                <li>D. A5</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q6" value="0"> A. A0</label>
+                <label><input type="radio" name="q6" value="0"> B. A3</label>
+                <label><input type="radio" name="q6" value="0.25"> C. A4</label>
+                <label><input type="radio" name="q6" value="0"> D. A5</label>
+            </div>
         </li>
 
         <li>
             Quelle orientation permet d'obtenir une page plus large que haute ?
-            <ul>
-                <li>A. Portrait</li>
-                <li>B. Paysage</li>
-                <li>C. Verticale</li>
-                <li>D. Standard</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q7" value="0"> A. Portrait</label>
+                <label><input type="radio" name="q7" value="0.25"> B. Paysage</label>
+                <label><input type="radio" name="q7" value="0"> C. Verticale</label>
+                <label><input type="radio" name="q7" value="0"> D. Standard</label>
+            </div>
         </li>
 
         <li>
             Où peut-on modifier les marges d'un document ?
-            <ul>
-                <li>A. Mise en page</li>
-                <li>B. Révision</li>
-                <li>C. Références</li>
-                <li>D. Affichage</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q8" value="0.25"> A. Mise en page</label>
+                <label><input type="radio" name="q8" value="0"> B. Révision</label>
+                <label><input type="radio" name="q8" value="0"> C. Références</label>
+                <label><input type="radio" name="q8" value="0"> D. Affichage</label>
+            </div>
         </li>
 
         <li>
             Quel alignement permet d'aligner le texte à la fois sur la marge gauche et la marge droite ?
-            <ul>
-                <li>A. Gauche</li>
-                <li>B. Droite</li>
-                <li>C. Centré</li>
-                <li>D. Justifié</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q9" value="0"> A. Gauche</label>
+                <label><input type="radio" name="q9" value="0"> B. Droite</label>
+                <label><input type="radio" name="q9" value="0"> C. Centré</label>
+                <label><input type="radio" name="q9" value="0.25"> D. Justifié</label>
+            </div>
         </li>
 
         <li>
             Quelle commande permet de modifier l'espace entre les lignes ?
-            <ul>
-                <li>A. Interligne</li>
-                <li>B. Retrait</li>
-                <li>C. Tabulation</li>
-                <li>D. Orientation</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q10" value="0.25"> A. Interligne</label>
+                <label><input type="radio" name="q10" value="0"> B. Retrait</label>
+                <label><input type="radio" name="q10" value="0"> C. Tabulation</label>
+                <label><input type="radio" name="q10" value="0"> D. Orientation</label>
+            </div>
         </li>
 
     </ol>
+
 
     <!-- ================= -->
     <!-- C. TABLEAUX -->
@@ -229,65 +284,66 @@
 
         <li>
             Quelle commande permet de créer un tableau ?
-            <ul>
-                <li>A. Insertion → Tableau</li>
-                <li>B. Accueil → Tableau</li>
-                <li>C. Révision → Tableau</li>
-                <li>D. Affichage → Tableau</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q11" value="0.25"> A. Insertion → Tableau</label>
+                <label><input type="radio" name="q11" value="0"> B. Accueil → Tableau</label>
+                <label><input type="radio" name="q11" value="0"> C. Révision → Tableau</label>
+                <label><input type="radio" name="q11" value="0"> D. Affichage → Tableau</label>
+            </div>
         </li>
 
         <li>
             Comment appelle-t-on l'intersection d'une ligne et d'une colonne ?
-            <ul>
-                <li>A. Une page</li>
-                <li>B. Une cellule</li>
-                <li>C. Une marge</li>
-                <li>D. Un paragraphe</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q12" value="0"> A. Une page</label>
+                <label><input type="radio" name="q12" value="0.25"> B. Une cellule</label>
+                <label><input type="radio" name="q12" value="0"> C. Une marge</label>
+                <label><input type="radio" name="q12" value="0"> D. Un paragraphe</label>
+            </div>
         </li>
 
         <li>
             Quelle commande permet de réunir plusieurs cellules ?
-            <ul>
-                <li>A. Fractionner</li>
-                <li>B. Fusionner les cellules</li>
-                <li>C. Trier</li>
-                <li>D. Supprimer</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q13" value="0"> A. Fractionner</label>
+                <label><input type="radio" name="q13" value="0.25"> B. Fusionner les cellules</label>
+                <label><input type="radio" name="q13" value="0"> C. Trier</label>
+                <label><input type="radio" name="q13" value="0"> D. Supprimer</label>
+            </div>
         </li>
 
         <li>
             Quelle commande permet de transformer une cellule en plusieurs cellules ?
-            <ul>
-                <li>A. Fusionner</li>
-                <li>B. Fractionner les cellules</li>
-                <li>C. Copier</li>
-                <li>D. Habillage</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q14" value="0"> A. Fusionner</label>
+                <label><input type="radio" name="q14" value="0.25"> B. Fractionner les cellules</label>
+                <label><input type="radio" name="q14" value="0"> C. Copier</label>
+                <label><input type="radio" name="q14" value="0"> D. Habillage</label>
+            </div>
         </li>
 
         <li>
             Quelle option permet d'ajuster automatiquement un tableau à la largeur du texte ?
-            <ul>
-                <li>A. Ajustement automatique</li>
-                <li>B. Mise en page</li>
-                <li>C. Habillage</li>
-                <li>D. Alignement</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q15" value="0.25"> A. Ajustement automatique</label>
+                <label><input type="radio" name="q15" value="0"> B. Mise en page</label>
+                <label><input type="radio" name="q15" value="0"> C. Habillage</label>
+                <label><input type="radio" name="q15" value="0"> D. Alignement</label>
+            </div>
         </li>
 
         <li>
             Quelle commande permet de classer les données d'un tableau ?
-            <ul>
-                <li>A. Trier</li>
-                <li>B. Fusionner</li>
-                <li>C. Fractionner</li>
-                <li>D. Convertir</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q16" value="0.25"> A. Trier</label>
+                <label><input type="radio" name="q16" value="0"> B. Fusionner</label>
+                <label><input type="radio" name="q16" value="0"> C. Fractionner</label>
+                <label><input type="radio" name="q16" value="0"> D. Convertir</label>
+            </div>
         </li>
 
     </ol>
+
 
     <!-- ================= -->
     <!-- D. BORDURES -->
@@ -299,35 +355,36 @@
 
         <li>
             Quelle fonctionnalité permet d'ajouter une couleur d'arrière-plan à une cellule ?
-            <ul>
-                <li>A. Trame de fond</li>
-                <li>B. Bordure</li>
-                <li>C. Marge</li>
-                <li>D. Retrait</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q17" value="0.25"> A. Trame de fond</label>
+                <label><input type="radio" name="q17" value="0"> B. Bordure</label>
+                <label><input type="radio" name="q17" value="0"> C. Marge</label>
+                <label><input type="radio" name="q17" value="0"> D. Retrait</label>
+            </div>
         </li>
 
         <li>
             Quelle fonctionnalité permet d'ajouter un contour autour d'un paragraphe ?
-            <ul>
-                <li>A. Bordures</li>
-                <li>B. Tabulations</li>
-                <li>C. Styles</li>
-                <li>D. Colonnes</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q18" value="0.25"> A. Bordures</label>
+                <label><input type="radio" name="q18" value="0"> B. Tabulations</label>
+                <label><input type="radio" name="q18" value="0"> C. Styles</label>
+                <label><input type="radio" name="q18" value="0"> D. Colonnes</label>
+            </div>
         </li>
 
         <li>
             Pour modifier la couleur de fond d'une cellule d'un tableau, on utilise principalement :
-            <ul>
-                <li>A. La trame</li>
-                <li>B. Le zoom</li>
-                <li>C. L'orientation</li>
-                <li>D. Le retrait</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q19" value="0.25"> A. La trame</label>
+                <label><input type="radio" name="q19" value="0"> B. Le zoom</label>
+                <label><input type="radio" name="q19" value="0"> C. L'orientation</label>
+                <label><input type="radio" name="q19" value="0"> D. Le retrait</label>
+            </div>
         </li>
 
     </ol>
+
 
     <!-- ================= -->
     <!-- E. STYLES -->
@@ -339,45 +396,46 @@
 
         <li>
             À quoi servent les styles dans Word ?
-            <ul>
-                <li>A. À supprimer les images</li>
-                <li>B. À appliquer rapidement une mise en forme cohérente</li>
-                <li>C. À créer des tableaux uniquement</li>
-                <li>D. À imprimer un document</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q20" value="0"> A. À supprimer les images</label>
+                <label><input type="radio" name="q20" value="0.25"> B. À appliquer rapidement une mise en forme cohérente</label>
+                <label><input type="radio" name="q20" value="0"> C. À créer des tableaux uniquement</label>
+                <label><input type="radio" name="q20" value="0"> D. À imprimer un document</label>
+            </div>
         </li>
 
         <li>
             Quel style est généralement utilisé pour le titre principal d'un document ?
-            <ul>
-                <li>A. Titre 1</li>
-                <li>B. Normal</li>
-                <li>C. Citation</li>
-                <li>D. Légende</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q21" value="0.25"> A. Titre 1</label>
+                <label><input type="radio" name="q21" value="0"> B. Normal</label>
+                <label><input type="radio" name="q21" value="0"> C. Citation</label>
+                <label><input type="radio" name="q21" value="0"> D. Légende</label>
+            </div>
         </li>
 
         <li>
             Pourquoi utilise-t-on les styles Titre 1 et Titre 2 ?
-            <ul>
-                <li>A. Pour créer une structure hiérarchique</li>
-                <li>B. Pour modifier les marges</li>
-                <li>C. Pour insérer une image</li>
-                <li>D. Pour créer une tabulation</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q22" value="0.25"> A. Pour créer une structure hiérarchique</label>
+                <label><input type="radio" name="q22" value="0"> B. Pour modifier les marges</label>
+                <label><input type="radio" name="q22" value="0"> C. Pour insérer une image</label>
+                <label><input type="radio" name="q22" value="0"> D. Pour créer une tabulation</label>
+            </div>
         </li>
 
         <li>
             Quelle fonctionnalité peut être créée automatiquement grâce aux styles de titres ?
-            <ul>
-                <li>A. Un sommaire automatique</li>
-                <li>B. Une image</li>
-                <li>C. Une vidéo</li>
-                <li>D. Une feuille Excel</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q23" value="0.25"> A. Un sommaire automatique</label>
+                <label><input type="radio" name="q23" value="0"> B. Une image</label>
+                <label><input type="radio" name="q23" value="0"> C. Une vidéo</label>
+                <label><input type="radio" name="q23" value="0"> D. Une feuille Excel</label>
+            </div>
         </li>
 
     </ol>
+
 
     <!-- ================= -->
     <!-- F. EN-TETE -->
@@ -389,35 +447,36 @@
 
         <li>
             Où peut-on insérer un en-tête ?
-            <ul>
-                <li>A. Insertion</li>
-                <li>B. Révision</li>
-                <li>C. Données</li>
-                <li>D. Publipostage</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q24" value="0.25"> A. Insertion</label>
+                <label><input type="radio" name="q24" value="0"> B. Révision</label>
+                <label><input type="radio" name="q24" value="0"> C. Données</label>
+                <label><input type="radio" name="q24" value="0"> D. Publipostage</label>
+            </div>
         </li>
 
         <li>
             Où peut-on généralement insérer un numéro de page ?
-            <ul>
-                <li>A. Insertion</li>
-                <li>B. Accueil</li>
-                <li>C. Révision</li>
-                <li>D. Références</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q25" value="0.25"> A. Insertion</label>
+                <label><input type="radio" name="q25" value="0"> B. Accueil</label>
+                <label><input type="radio" name="q25" value="0"> C. Révision</label>
+                <label><input type="radio" name="q25" value="0"> D. Références</label>
+            </div>
         </li>
 
         <li>
             Quel élément apparaît généralement en bas d'une page ?
-            <ul>
-                <li>A. Le pied de page</li>
-                <li>B. L'en-tête</li>
-                <li>C. La barre de titre</li>
-                <li>D. Le ruban</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q26" value="0.25"> A. Le pied de page</label>
+                <label><input type="radio" name="q26" value="0"> B. L'en-tête</label>
+                <label><input type="radio" name="q26" value="0"> C. La barre de titre</label>
+                <label><input type="radio" name="q26" value="0"> D. Le ruban</label>
+            </div>
         </li>
 
     </ol>
+
 
     <!-- ================= -->
     <!-- G. IMAGES -->
@@ -429,45 +488,46 @@
 
         <li>
             Dans quel onglet peut-on insérer une image ?
-            <ul>
-                <li>A. Insertion</li>
-                <li>B. Révision</li>
-                <li>C. Affichage</li>
-                <li>D. Références</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q27" value="0.25"> A. Insertion</label>
+                <label><input type="radio" name="q27" value="0"> B. Révision</label>
+                <label><input type="radio" name="q27" value="0"> C. Affichage</label>
+                <label><input type="radio" name="q27" value="0"> D. Références</label>
+            </div>
         </li>
 
         <li>
             Quelle fonctionnalité permet de déplacer une image librement par rapport au texte ?
-            <ul>
-                <li>A. Habillage du texte</li>
-                <li>B. Interligne</li>
-                <li>C. Tabulation</li>
-                <li>D. Orientation</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q28" value="0.25"> A. Habillage du texte</label>
+                <label><input type="radio" name="q28" value="0"> B. Interligne</label>
+                <label><input type="radio" name="q28" value="0"> C. Tabulation</label>
+                <label><input type="radio" name="q28" value="0"> D. Orientation</label>
+            </div>
         </li>
 
         <li>
             Quel outil permet de créer un texte décoratif ?
-            <ul>
-                <li>A. WordArt</li>
-                <li>B. Tableau</li>
-                <li>C. SmartArt</li>
-                <li>D. Tabulation</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q29" value="0.25"> A. WordArt</label>
+                <label><input type="radio" name="q29" value="0"> B. Tableau</label>
+                <label><input type="radio" name="q29" value="0"> C. SmartArt</label>
+                <label><input type="radio" name="q29" value="0"> D. Tabulation</label>
+            </div>
         </li>
 
         <li>
             Quel outil permet de représenter visuellement une organisation ou un processus ?
-            <ul>
-                <li>A. SmartArt</li>
-                <li>B. WordArt</li>
-                <li>C. Bordure</li>
-                <li>D. En-tête</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q30" value="0.25"> A. SmartArt</label>
+                <label><input type="radio" name="q30" value="0"> B. WordArt</label>
+                <label><input type="radio" name="q30" value="0"> C. Bordure</label>
+                <label><input type="radio" name="q30" value="0"> D. En-tête</label>
+            </div>
         </li>
 
     </ol>
+
 
     <!-- ================= -->
     <!-- H. QUESTIONS BONUS -->
@@ -479,52 +539,52 @@
 
         <li>
             Quelle commande permet de changer la taille du texte ?
-            <ul>
-                <li>A. Taille de police</li>
-                <li>B. Orientation</li>
-                <li>C. Marges</li>
-                <li>D. Habillage</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q31" value="0.25"> A. Taille de police</label>
+                <label><input type="radio" name="q31" value="0"> B. Orientation</label>
+                <label><input type="radio" name="q31" value="0"> C. Marges</label>
+                <label><input type="radio" name="q31" value="0"> D. Habillage</label>
+            </div>
         </li>
 
         <li>
             Quel raccourci permet de mettre un texte en gras ?
-            <ul>
-                <li>A. Ctrl + I</li>
-                <li>B. Ctrl + G</li>
-                <li>C. Ctrl + U</li>
-                <li>D. Ctrl + P</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q32" value="0"> A. Ctrl + I</label>
+                <label><input type="radio" name="q32" value="0.25"> B. Ctrl + G</label>
+                <label><input type="radio" name="q32" value="0"> C. Ctrl + U</label>
+                <label><input type="radio" name="q32" value="0"> D. Ctrl + P</label>
+            </div>
         </li>
 
         <li>
             Quel raccourci permet d'enregistrer un document ?
-            <ul>
-                <li>A. Ctrl + S</li>
-                <li>B. Ctrl + C</li>
-                <li>C. Ctrl + V</li>
-                <li>D. Ctrl + Z</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q33" value="0.25"> A. Ctrl + S</label>
+                <label><input type="radio" name="q33" value="0"> B. Ctrl + C</label>
+                <label><input type="radio" name="q33" value="0"> C. Ctrl + V</label>
+                <label><input type="radio" name="q33" value="0"> D. Ctrl + Z</label>
+            </div>
         </li>
 
         <li>
             Quel raccourci permet d'annuler la dernière action ?
-            <ul>
-                <li>A. Ctrl + A</li>
-                <li>B. Ctrl + Z</li>
-                <li>C. Ctrl + P</li>
-                <li>D. Ctrl + X</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q34" value="0"> A. Ctrl + A</label>
+                <label><input type="radio" name="q34" value="0.25"> B. Ctrl + Z</label>
+                <label><input type="radio" name="q34" value="0"> C. Ctrl + P</label>
+                <label><input type="radio" name="q34" value="0"> D. Ctrl + X</label>
+            </div>
         </li>
 
         <li>
             Quel raccourci permet de sélectionner tout le contenu du document ?
-            <ul>
-                <li>A. Ctrl + A</li>
-                <li>B. Ctrl + S</li>
-                <li>C. Ctrl + E</li>
-                <li>D. Ctrl + T</li>
-            </ul>
+            <div class="box-reponse">
+                <label><input type="radio" name="q35" value="0.25"> A. Ctrl + A</label>
+                <label><input type="radio" name="q35" value="0"> B. Ctrl + S</label>
+                <label><input type="radio" name="q35" value="0"> C. Ctrl + E</label>
+                <label><input type="radio" name="q35" value="0"> D. Ctrl + T</label>
+            </div>
         </li>
 
     </ol>
@@ -604,6 +664,8 @@
 
 </section>
 
+<div id="resultat"></div>
+
     <section>
       <h2>Partie 2 : Pratique – 15 points</h2>
       <p>Réalisez une fiche d’inscription avec :</p>
@@ -615,25 +677,20 @@
     </section>
 
     <p style="margin-top:40px; text-align:center; color:#666;">
-      © Gi.Code Formation – Bureautique 2025
+      © Gi.Code Formation – Bureautique 2026
     </p>
   </div>
 
-  <!-- Bouton de téléchargement -->
-  <button onclick="telechargerPDF()">📄 Télécharger cette évaluation en PDF</button>
+  <button type="button" id="btnValider">
+    ✅ Valider mon QCM
+</button>
 
-  <script>
-    function telechargerPDF() {
-      const element = document.getElementById('zonePDF');
-      const opt = {
-        margin: 0.5,
-        filename: 'Debrief Anglais.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 3 },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-      html2pdf().set(opt).from(element).save();
-    }
-  </script>
+  <!-- Bouton de téléchargement -->
+  <button onclick="telechargerPDF()">📄 Télécharger cette Revision en PDF</button>
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="evaluation.js"></script>
 </body>
 </html>
